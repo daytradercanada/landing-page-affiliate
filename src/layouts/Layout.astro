@@ -1,0 +1,97 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = "Guide Gratuit : Investir en Bourse & Apprendre le Trading",
+  description = "Recevez gratuitement notre guide complet pour investir en bourse et apprendre le trading. Methode structuree, gestion du risque, adaptee aux debutants comme aux confirmes."
+} = Astro.props
+
+const ogImage = new URL('/images/og-image.jpg', Astro.url).href
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href
+const metaPixelId = import.meta.env.PUBLIC_META_PIXEL_ID ?? ''
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content="fr_FR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tarteaucitron.js (Cookie Consent - CNIL) -->
+    <script is:inline src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.19.0/tarteaucitron.min.js"></script>
+    <script is:inline define:vars={{ metaPixelId }}>
+      tarteaucitron.init({
+        "privacyUrl": "#politique-confidentialite",
+        "bodyPosition": "bottom",
+        "hashtag": "#tarteaucitron",
+        "cookieName": "tarteaucitron",
+        "orientation": "middle",
+        "groupServices": false,
+        "showDetailsOnClick": true,
+        "serviceDefaultState": "wait",
+        "showAlertSmall": false,
+        "cookieslist": false,
+        "closePopup": false,
+        "showIcon": true,
+        "iconPosition": "BottomRight",
+        "adblocker": false,
+        "DenyAllCta": true,
+        "AcceptAllCta": true,
+        "highPrivacy": true,
+        "alwaysNeedConsent": false,
+        "handleBrowserDNTRequest": false,
+        "removeCredit": false,
+        "moreInfoLink": true,
+        "useExternalCss": false,
+        "useExternalJs": false,
+        "mandatory": true,
+        "mandatoryCta": true,
+        "readmoreLink": "#politique-confidentialite"
+      });
+
+      if (metaPixelId) {
+        tarteaucitron.user.facebookpixelId = metaPixelId;
+        tarteaucitron.user.facebookpixelMore = function () {};
+        (tarteaucitron.job = tarteaucitron.job || []).push('facebookpixel');
+      }
+    </script>
+  </head>
+  <body class="bg-white text-gray-900 font-sans antialiased">
+    <slot />
+  </body>
+</html>

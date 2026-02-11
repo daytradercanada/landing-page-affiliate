@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Hero from '../components/Hero.astro'
+import SocialProof from '../components/SocialProof.astro'
+import Differentiator from '../components/Differentiator.astro'
+import ProblemBlock from '../components/ProblemBlock.astro'
+import Urgency from '../components/Urgency.astro'
+import Footer from '../components/Footer.astro'
+import LeadForm from '../components/LeadForm'
+import DiagnosticForm from '../components/DiagnosticForm'
+---
+
+<Layout>
+  <!-- Hero + Lead Form -->
+  <Hero>
+    <LeadForm client:load />
+  </Hero>
+
+  <!-- Social Proof -->
+  <SocialProof />
+
+  <!-- Differentiator -->
+  <Differentiator />
+
+  <!-- Problem Block -->
+  <ProblemBlock />
+
+  <!-- Diagnostic Form Section -->
+  <section class="bg-gradient-to-b from-white to-gray-50 py-16 sm:py-20" id="diagnostic">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-10 max-w-2xl text-center">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-primary-100 px-4 py-1.5 text-sm font-medium text-primary-700">
+          <span class="inline-block h-2 w-2 rounded-full bg-primary-500"></span>
+          DIAGNOSTIC GRATUIT
+        </div>
+        <h2 class="text-2xl font-extrabold text-gray-900 sm:text-3xl">
+          Ou alors, obtenez un plan d'action personnalise
+        </h2>
+        <p class="mt-3 text-gray-600">
+          Repondez a 3 questions et recevez des recommandations adaptees a votre
+          profil d'investisseur.
+        </p>
+      </div>
+
+      <DiagnosticForm client:load />
+    </div>
+  </section>
+
+  <!-- Urgency -->
+  <Urgency />
+
+  <!-- Footer -->
+  <Footer />
+</Layout>

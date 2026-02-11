@@ -1,0 +1,63 @@
+---
+
+---
+
+<section class="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+    <div class="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+      <!-- Left: Text Content -->
+      <div class="flex flex-col justify-center">
+        <div class="mb-6 inline-flex w-fit items-center gap-2 rounded-full bg-primary-100 px-4 py-1.5 text-sm font-medium text-primary-700">
+          <span class="inline-block h-2 w-2 rounded-full bg-primary-500"></span>
+          OFFRE EXCLUSIVE
+        </div>
+
+        <h1 class="text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
+          Recevez <span class="text-primary-600">GRATUITEMENT</span> notre Guide pour
+          <span class="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">
+            Investir en Bourse
+          </span>
+          et Apprendre le Trading
+        </h1>
+
+        <p class="mt-6 text-lg leading-relaxed text-gray-600 sm:text-xl">
+          Une methode claire, structuree et accessible pour prendre le controle
+          de vos investissements, meme si vous partez de zero.
+        </p>
+
+        <!-- Micro-preuves -->
+        <div class="mt-8 space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-100">
+              <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+            </div>
+            <span class="text-gray-700">Adapte aux debutants comme aux profils confirmes</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-100">
+              <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+            </div>
+            <span class="text-gray-700">Approche basee sur la gestion du risque</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-100">
+              <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+            </div>
+            <span class="text-gray-700">100% gratuit, sans engagement</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form slot -->
+      <div class="flex justify-center lg:justify-end">
+        <slot />
+      </div>
+    </div>
+  </div>
+</section>

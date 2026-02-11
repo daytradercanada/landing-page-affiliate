@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const type = Astro.url.searchParams.get('type') ?? 'guide'
+const isGuide = type === 'guide'
+---
+
+<Layout title="Merci ! - Votre demande a bien ete prise en compte">
+  <main class="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-50 via-white to-primary-50 px-4">
+    <div class="mx-auto max-w-lg text-center">
+      <!-- Success Icon -->
+      <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
+        <svg class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+        </svg>
+      </div>
+
+      {isGuide ? (
+        <>
+          <h1 class="text-3xl font-extrabold text-gray-900">
+            Merci ! Votre guide est en route
+          </h1>
+          <p class="mt-4 text-lg text-gray-600">
+            Vous allez recevoir votre guide gratuit par email dans les prochaines
+            minutes. Pensez a verifier votre dossier spam si vous ne le trouvez pas.
+          </p>
+          <div class="mt-8 rounded-xl bg-primary-50 p-6">
+            <p class="text-sm font-medium text-primary-700">
+              En attendant, vous pouvez aussi demander un
+              <a href="/#diagnostic" class="font-bold underline">diagnostic personnalise gratuit</a>
+              pour aller encore plus loin.
+            </p>
+          </div>
+        </>
+      ) : (
+        <>
+          <h1 class="text-3xl font-extrabold text-gray-900">
+            Merci ! Votre diagnostic est en cours de preparation
+          </h1>
+          <p class="mt-4 text-lg text-gray-600">
+            Un membre de notre equipe pedagogique analysera vos reponses et vous
+            enverra un plan d'action personnalise par email sous 24 a 48h.
+          </p>
+          <div class="mt-8 rounded-xl bg-primary-50 p-6">
+            <p class="text-sm font-medium text-primary-700">
+              Nous avons bien recu vos informations. Consultez votre boite mail
+              dans les prochaines heures pour recevoir votre plan personnalise.
+            </p>
+          </div>
+        </>
+      )}
+
+      <a
+        href="/"
+        class="mt-8 inline-flex items-center gap-2 text-sm font-medium text-primary-600 hover:text-primary-700"
+      >
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Retour a la page d'accueil
+      </a>
+    </div>
+  </main>
+</Layout>
