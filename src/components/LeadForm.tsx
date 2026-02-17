@@ -40,7 +40,7 @@ export default function LeadForm() {
       fireMetaPixelLead()
       window.location.href = '/merci?type=guide'
     } catch {
-      setSubmitError("Une erreur est survenue. Veuillez reessayer.")
+      setSubmitError("Une erreur est survenue. Veuillez réessayer.")
       setIsSubmitting(false)
     }
   }
@@ -56,11 +56,11 @@ export default function LeadForm() {
       </div>
 
       <h2 className="text-xl font-bold text-gray-900">
-        Pret a Investir dans la Prochaine Licorne ?
+        📥 Recevoir mon guide gratuit
       </h2>
       <p className="mt-2 text-sm text-gray-600">
-        Remplissez le formulaire maintenant pour recevoir des alertes sur les
-        nouvelles levees de fonds en cryptomonnaie et beneficier de bonus exclusifs.
+        Remplissez le formulaire pour recevoir maintenant votre guide Investir en
+        Bourse et Apprendre le Trading
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4" noValidate>
@@ -105,7 +105,7 @@ export default function LeadForm() {
         {/* Telephone */}
         <div>
           <label htmlFor="telephone" className="mb-1 block text-sm font-medium text-gray-700">
-            Telephone
+            Téléphone
           </label>
           <input
             id="telephone"
@@ -132,7 +132,7 @@ export default function LeadForm() {
             <span>
               J'accepte la{' '}
               <a href="#politique-confidentialite" className="text-primary-600 underline">
-                politique de confidentialite
+                politique de confidentialité
               </a>{' '}
               et les{' '}
               <a href="#politique-confidentialite" className="text-primary-600 underline">
@@ -169,7 +169,7 @@ export default function LeadForm() {
           disabled={isSubmitting}
           className="w-full rounded-xl bg-gradient-to-r from-primary-600 to-accent-500 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-primary-500/25 transition-all hover:shadow-xl hover:shadow-primary-500/30 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {isSubmitting ? 'Envoi en cours...' : 'Je recois mon guide maintenant'}
+          {isSubmitting ? 'Envoi en cours...' : 'Je reçois mon guide maintenant'}
         </button>
       </form>
 
@@ -179,9 +179,9 @@ export default function LeadForm() {
           <svg className="h-3.5 w-3.5 text-green-500" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
           </svg>
-          Vos donnees sont protegees et confidentielles
+          Vos données sont protégées et confidentielles
         </div>
-        <span>Desinscription possible a tout moment</span>
+        <span>Désinscription possible à tout moment</span>
         <span>Pas de spam, promis.</span>
       </div>
     </div>

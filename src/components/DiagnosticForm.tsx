@@ -21,20 +21,20 @@ const stepSchemas = [
 ]
 
 const objectifOptions = [
-  { value: 'revenu-complementaire', label: 'Generer un revenu complementaire' },
-  { value: 'independance-financiere', label: 'Atteindre l\'independance financiere' },
+  { value: 'revenu-complementaire', label: 'Générer un revenu complémentaire' },
+  { value: 'independance-financiere', label: 'Atteindre l\'indépendance financière' },
   { value: 'patrimoine', label: 'Faire fructifier mon patrimoine' },
 ] as const
 
 const niveauOptions = [
-  { value: 'debutant', label: 'Debutant — je decouvre' },
-  { value: 'intermediaire', label: 'Intermediaire — j\'ai des bases' },
-  { value: 'avance', label: 'Avance — je veux me perfectionner' },
+  { value: 'debutant', label: 'Débutant — je découvre' },
+  { value: 'intermediaire', label: 'Intermédiaire — j\'ai des bases' },
+  { value: 'avance', label: 'Avancé — je veux me perfectionner' },
 ] as const
 
 const difficulteOptions = [
-  { value: 'manque-methode', label: 'Je manque de methode et de structure' },
-  { value: 'gestion-emotions', label: 'J\'ai du mal a gerer mes emotions' },
+  { value: 'manque-methode', label: 'Je manque de méthode et de structure' },
+  { value: 'gestion-emotions', label: 'J\'ai du mal à gérer mes émotions' },
   { value: 'manque-temps', label: 'Je n\'ai pas assez de temps' },
   { value: 'peur-pertes', label: 'J\'ai peur de perdre de l\'argent' },
 ] as const
@@ -97,7 +97,7 @@ export default function DiagnosticForm() {
       fireMetaPixelLead()
       window.location.href = '/merci?type=diagnostic'
     } catch {
-      setSubmitError("Une erreur est survenue. Veuillez reessayer.")
+      setSubmitError("Une erreur est survenue. Veuillez réessayer.")
       setIsSubmitting(false)
     }
   }
@@ -109,8 +109,8 @@ export default function DiagnosticForm() {
       {/* Progress Bar */}
       <div className="mb-6">
         <div className="mb-2 flex items-center justify-between text-sm text-gray-600">
-          <span className="font-medium">Diagnostic personnalise</span>
-          <span>Etape {currentStep + 1}/{TOTAL_STEPS}</span>
+          <span className="font-medium">Diagnostic personnalisé</span>
+          <span>Étape {currentStep + 1}/{TOTAL_STEPS}</span>
         </div>
         <div className="h-2 overflow-hidden rounded-full bg-gray-200">
           <div
@@ -188,7 +188,7 @@ export default function DiagnosticForm() {
           {currentStep === 2 && (
             <div className="space-y-4">
               <h3 className="text-lg font-bold text-gray-900">
-                Quelle est votre principale difficulte aujourd'hui ?
+                Quelle est votre principale difficulté aujourd'hui ?
               </h3>
               <div className="space-y-3">
                 {difficulteOptions.map((opt) => (
@@ -216,10 +216,10 @@ export default function DiagnosticForm() {
           {currentStep === 3 && (
             <div className="space-y-4">
               <h3 className="text-lg font-bold text-gray-900">
-                Recevez votre plan personnalise
+                Recevez votre plan personnalisé
               </h3>
               <p className="text-sm text-gray-600">
-                Remplissez vos coordonnees pour recevoir un diagnostic adapte a
+                Remplissez vos coordonnées pour recevoir un diagnostic adapté à
                 votre profil.
               </p>
 
@@ -261,7 +261,7 @@ export default function DiagnosticForm() {
 
               <div>
                 <label htmlFor="diag-tel" className="mb-1 block text-sm font-medium text-gray-700">
-                  Telephone
+                  Téléphone
                 </label>
                 <input
                   id="diag-tel"
@@ -288,7 +288,7 @@ export default function DiagnosticForm() {
                   <span>
                     J'accepte la{' '}
                     <a href="#politique-confidentialite" className="text-primary-600 underline">
-                      politique de confidentialite
+                      politique de confidentialité
                     </a>{' '}
                     et les{' '}
                     <a href="#politique-confidentialite" className="text-primary-600 underline">
@@ -348,7 +348,7 @@ export default function DiagnosticForm() {
               disabled={isSubmitting}
               className="ml-auto rounded-xl bg-gradient-to-r from-primary-600 to-accent-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-primary-500/25 transition-all hover:shadow-xl hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isSubmitting ? 'Envoi en cours...' : 'Recevoir mon plan personnalise'}
+              {isSubmitting ? 'Envoi en cours...' : 'Recevoir mon plan personnalisé'}
             </button>
           )}
         </div>
