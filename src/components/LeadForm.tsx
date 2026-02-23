@@ -56,7 +56,7 @@ export default function LeadForm() {
       </div>
 
       <h2 className="text-xl font-bold text-gray-900">
-        📥 Recevoir mon guide gratuit
+        📥 Recevoir mon eBook gratuit
       </h2>
       <p className="mt-2 text-sm text-gray-600">
         Remplissez le formulaire pour recevoir maintenant votre guide Investir en
