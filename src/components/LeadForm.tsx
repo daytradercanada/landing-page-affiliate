@@ -67,7 +67,7 @@ export default function LeadForm() {
         {/* Nom */}
         <div>
           <label htmlFor="nom" className="mb-1 block text-sm font-medium text-gray-700">
-            Nom complet
+            Nom complet <span className="text-red-500">*</span>
           </label>
           <input
             id="nom"
@@ -86,7 +86,7 @@ export default function LeadForm() {
         {/* Email */}
         <div>
           <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">
-            Adresse email
+            Adresse email <span className="text-red-500">*</span>
           </label>
           <input
             id="email"
@@ -105,7 +105,7 @@ export default function LeadForm() {
         {/* Telephone */}
         <div>
           <label htmlFor="telephone" className="mb-1 block text-sm font-medium text-gray-700">
-            Téléphone
+            Téléphone <span className="text-red-500">*</span>
           </label>
           <input
             id="telephone"
