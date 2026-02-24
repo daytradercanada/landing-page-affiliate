@@ -26,7 +26,7 @@ export const POST: APIRoute = async ({ request }) => {
   const nomDeFamille = rest.join(' ')
 
   // Normalize phone to E.164 format for Brevo SMS attribute
-  const cleaned = telephone.replace(/[\s.\-]/g, '')
+  const cleaned = telephone.replace(/[\s.\-()\u00A0]/g, '')
   const normalizedPhone = cleaned.startsWith('00')
     ? `+${cleaned.slice(2)}`
     : cleaned.startsWith('0')
@@ -34,6 +34,9 @@ export const POST: APIRoute = async ({ request }) => {
       : cleaned.startsWith('+')
         ? cleaned
         : `+${cleaned}`
+
+  // E.164: + followed by 8–15 digits (country code + subscriber number)
+  const isValidE164 = /^\+[1-9]\d{7,14}$/.test(normalizedPhone)
 
   const listIds: number[] = []
   if (source === 'guide') {
@@ -43,13 +46,17 @@ export const POST: APIRoute = async ({ request }) => {
     listIds.push(3)
   }
 
+  const attributes: Record<string, string> = {
+    PRENOM: prenom,
+    NOM: nomDeFamille || prenom,
+  }
+  if (isValidE164) {
+    attributes.SMS = normalizedPhone
+  }
+
   const brevoPayload = {
     email,
-    attributes: {
-      PRENOM: prenom,
-      NOM: nomDeFamille || prenom,
-      SMS: normalizedPhone,
-    },
+    attributes,
     listIds,
     updateEnabled: true,
   }
