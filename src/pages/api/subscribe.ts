@@ -61,15 +61,35 @@ export const POST: APIRoute = async ({ request }) => {
     updateEnabled: true,
   }
 
-  const response = await fetch('https://api.brevo.com/v3/contacts', {
+  const brevoHeaders = {
+    'api-key': apiKey,
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  }
+
+  let response = await fetch('https://api.brevo.com/v3/contacts', {
     method: 'POST',
-    headers: {
-      'api-key': apiKey,
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
+    headers: brevoHeaders,
     body: JSON.stringify(brevoPayload),
   })
+
+  // If SMS is already associated with another contact, retry without SMS
+  if (!response.ok && attributes.SMS) {
+    try {
+      const errorData = await response.json()
+      if (errorData.code === 'duplicate_parameter') {
+        const { SMS: _, ...attributesWithoutSms } = attributes
+        const retryPayload = { ...brevoPayload, attributes: attributesWithoutSms }
+        response = await fetch('https://api.brevo.com/v3/contacts', {
+          method: 'POST',
+          headers: brevoHeaders,
+          body: JSON.stringify(retryPayload),
+        })
+      }
+    } catch {
+      // If JSON parse fails, fall through to the error handling below
+    }
+  }
 
   if (!response.ok) {
     const error = await response.text()
