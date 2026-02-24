@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import Layout from '../../layouts/Layout.astro'
 
 const type = Astro.url.searchParams.get('type') ?? 'guide'
 const isGuide = type === 'guide'
@@ -39,7 +39,7 @@ const isGuide = type === 'guide'
           <div class="mt-8 rounded-xl bg-primary-50 p-6">
             <p class="text-sm font-medium text-primary-700">
               En attendant, vous pouvez aussi demander un
-              <a href="/#diagnostic" class="font-bold underline">diagnostic personnalisé gratuit</a>
+              <a href="/ebook#diagnostic" class="font-bold underline">diagnostic personnalisé gratuit</a>
               pour aller encore plus loin.
             </p>
           </div>
@@ -63,7 +63,7 @@ const isGuide = type === 'guide'
       )}
 
       <a
-        href="/"
+        href="/ebook"
         class="mt-8 inline-flex items-center gap-2 text-sm font-medium text-primary-600 hover:text-primary-700"
       >
         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">

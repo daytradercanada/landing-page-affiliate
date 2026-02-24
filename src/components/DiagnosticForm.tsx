@@ -95,7 +95,7 @@ export default function DiagnosticForm() {
         difficulte: allValues.difficulte,
       })
       fireMetaPixelLead()
-      window.location.href = '/merci?type=diagnostic'
+      window.location.href = '/ebook/merci?type=diagnostic'
     } catch {
       setSubmitError("Une erreur est survenue. Veuillez réessayer.")
       setIsSubmitting(false)

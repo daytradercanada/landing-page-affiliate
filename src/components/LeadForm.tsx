@@ -38,7 +38,7 @@ export default function LeadForm() {
         consentementMarketing: data.consentementMarketing,
       })
       fireMetaPixelLead()
-      window.location.href = '/merci?type=guide'
+      window.location.href = '/ebook/merci?type=guide'
     } catch {
       setSubmitError("Une erreur est survenue. Veuillez réessayer.")
       setIsSubmitting(false)
