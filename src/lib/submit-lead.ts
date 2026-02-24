@@ -27,22 +27,23 @@ async function submitToBrevo(payload: LeadPayload): Promise<void> {
   }
 }
 
-async function submitToZapier(payload: LeadPayload): Promise<void> {
-  const endpoint = import.meta.env.PUBLIC_ZAPIER_DIAGNOSTIC_WEBHOOK
-  if (!endpoint) return
-
-  await fetch(endpoint, {
+async function submitToDiagnostic(payload: LeadPayload): Promise<void> {
+  const response = await fetch('/api/diagnostic', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      objectif: payload.objectif ?? '',
-      niveau: payload.niveau ?? '',
-      difficulte: payload.difficulte ?? '',
-      fullname: payload.nom,
-      Phone: payload.telephone,
-      Email: payload.email,
+      objectif: payload.objectif,
+      niveau: payload.niveau,
+      difficulte: payload.difficulte,
+      nom: payload.nom,
+      email: payload.email,
+      telephone: payload.telephone,
     }),
   })
+
+  if (!response.ok) {
+    throw new Error('Erreur lors de l\'envoi du diagnostic')
+  }
 }
 
 export async function submitLead(payload: LeadPayload): Promise<{ success: boolean }> {
@@ -56,16 +57,14 @@ export async function submitLead(payload: LeadPayload): Promise<{ success: boole
   }
 
   if (payload.source === 'diagnostic') {
-    promises.push(submitToZapier(payload))
+    promises.push(submitToDiagnostic(payload))
   }
 
   const results = await Promise.allSettled(promises)
 
-  if (needsBrevo) {
-    const brevoResult = results[0]
-    if (brevoResult.status === 'rejected') {
-      throw new Error(brevoResult.reason?.message ?? 'Erreur Brevo')
-    }
+  const firstFailure = results.find((r) => r.status === 'rejected')
+  if (firstFailure && firstFailure.status === 'rejected') {
+    throw new Error(firstFailure.reason?.message ?? 'Erreur lors de l\'envoi')
   }
 
   return { success: true }

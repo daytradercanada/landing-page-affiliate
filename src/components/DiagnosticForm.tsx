@@ -57,6 +57,7 @@ export default function DiagnosticForm() {
     formState: { errors },
   } = useForm<DiagnosticFormData>({
     resolver: zodResolver(stepSchemas[currentStep]),
+    shouldUnregister: false,
     defaultValues: {
       consentementRGPD: false as unknown as true,
       consentementMarketing: false,
