@@ -25,6 +25,16 @@ export const POST: APIRoute = async ({ request }) => {
   const [prenom, ...rest] = nom.trim().split(' ')
   const nomDeFamille = rest.join(' ')
 
+  // Normalize phone to E.164 format for Brevo SMS attribute
+  const cleaned = telephone.replace(/[\s.\-]/g, '')
+  const normalizedPhone = cleaned.startsWith('00')
+    ? `+${cleaned.slice(2)}`
+    : cleaned.startsWith('0')
+      ? `+33${cleaned.slice(1)}`
+      : cleaned.startsWith('+')
+        ? cleaned
+        : `+${cleaned}`
+
   const listIds: number[] = []
   if (source === 'guide') {
     listIds.push(9)
@@ -38,7 +48,7 @@ export const POST: APIRoute = async ({ request }) => {
     attributes: {
       PRENOM: prenom,
       NOM: nomDeFamille || prenom,
-      SMS: telephone,
+      SMS: normalizedPhone,
     },
     listIds,
     updateEnabled: true,

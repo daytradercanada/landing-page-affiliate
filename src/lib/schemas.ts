@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
-const phoneRegex = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/
+// Accepts French local (0X ...) or international (+XX... / 00XX...)
+const phoneRegex = /^(?:(?:\+|00)\d{1,3}[\s.-]*\d[\s.\-\d]{6,14}|0\s*[1-9](?:[\s.-]*\d{2}){4})$/
 
 export const leadFormSchema = z.object({
   nom: z.string().min(2, 'Veuillez entrer votre nom complet'),

@@ -266,7 +266,7 @@ export default function DiagnosticForm() {
                 <input
                   id="diag-tel"
                   type="tel"
-                  placeholder="06 12 34 56 78"
+                  placeholder="+33 6 12 34 56 78"
                   className={`w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition-colors focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 ${
                     errors.telephone ? 'border-red-400 bg-red-50' : 'border-gray-300 bg-white'
                   }`}
