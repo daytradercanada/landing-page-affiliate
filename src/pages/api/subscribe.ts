@@ -13,7 +13,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const body = await request.json()
-  const { email, nom, telephone, consentementMarketing } = body
+  const { email, nom, telephone, source, consentementMarketing } = body
 
   if (!email || !nom || !telephone) {
     return new Response(
@@ -25,7 +25,10 @@ export const POST: APIRoute = async ({ request }) => {
   const [prenom, ...rest] = nom.trim().split(' ')
   const nomDeFamille = rest.join(' ')
 
-  const listIds = [9]
+  const listIds: number[] = []
+  if (source === 'guide') {
+    listIds.push(9)
+  }
   if (consentementMarketing) {
     listIds.push(3)
   }

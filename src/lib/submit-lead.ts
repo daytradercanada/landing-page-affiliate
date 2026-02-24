@@ -17,6 +17,7 @@ async function submitToBrevo(payload: LeadPayload): Promise<void> {
       email: payload.email,
       nom: payload.nom,
       telephone: payload.telephone,
+      source: payload.source,
       consentementMarketing: payload.consentementMarketing,
     }),
   })
@@ -45,7 +46,14 @@ async function submitToZapier(payload: LeadPayload): Promise<void> {
 }
 
 export async function submitLead(payload: LeadPayload): Promise<{ success: boolean }> {
-  const promises: Promise<void>[] = [submitToBrevo(payload)]
+  const needsBrevo =
+    payload.source === 'guide' || payload.consentementMarketing
+
+  const promises: Promise<void>[] = []
+
+  if (needsBrevo) {
+    promises.push(submitToBrevo(payload))
+  }
 
   if (payload.source === 'diagnostic') {
     promises.push(submitToZapier(payload))
@@ -53,9 +61,11 @@ export async function submitLead(payload: LeadPayload): Promise<{ success: boole
 
   const results = await Promise.allSettled(promises)
 
-  const brevoResult = results[0]
-  if (brevoResult.status === 'rejected') {
-    throw new Error(brevoResult.reason?.message ?? 'Erreur Brevo')
+  if (needsBrevo) {
+    const brevoResult = results[0]
+    if (brevoResult.status === 'rejected') {
+      throw new Error(brevoResult.reason?.message ?? 'Erreur Brevo')
+    }
   }
 
   return { success: true }
