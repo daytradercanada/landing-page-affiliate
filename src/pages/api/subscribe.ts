@@ -25,15 +25,8 @@ export const POST: APIRoute = async ({ request }) => {
   const [prenom, ...rest] = nom.trim().split(' ')
   const nomDeFamille = rest.join(' ')
 
-  // Normalize phone to E.164 format for Brevo SMS attribute
-  const cleaned = telephone.replace(/[\s.\-()\u00A0]/g, '')
-  const normalizedPhone = cleaned.startsWith('00')
-    ? `+${cleaned.slice(2)}`
-    : cleaned.startsWith('0')
-      ? `+33${cleaned.slice(1)}`
-      : cleaned.startsWith('+')
-        ? cleaned
-        : `+${cleaned}`
+  // Phone is already E.164 from PhoneInput component; safety fallback
+  const normalizedPhone = telephone.startsWith('+') ? telephone : '+' + telephone
 
   // E.164: + followed by 8–15 digits (country code + subscriber number)
   const isValidE164 = /^\+[1-9]\d{7,14}$/.test(normalizedPhone)

@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState, useEffect } from 'react'
 import {
@@ -10,6 +10,7 @@ import {
 } from '../lib/schemas'
 import { submitLead, fireMetaPixelLead } from '../lib/submit-lead'
 import { captureUtmParams } from '../lib/utm'
+import PhoneInput from './PhoneInput'
 
 const TOTAL_STEPS = 4
 
@@ -54,11 +55,13 @@ export default function DiagnosticForm() {
     handleSubmit,
     trigger,
     getValues,
+    control,
     formState: { errors },
   } = useForm<DiagnosticFormData>({
     resolver: zodResolver(stepSchemas[currentStep]),
     shouldUnregister: false,
     defaultValues: {
+      telephone: '',
       consentementRGPD: false as unknown as true,
       consentementMarketing: false,
     },
@@ -264,14 +267,18 @@ export default function DiagnosticForm() {
                 <label htmlFor="diag-tel" className="mb-1 block text-sm font-medium text-gray-700">
                   Téléphone
                 </label>
-                <input
-                  id="diag-tel"
-                  type="tel"
-                  placeholder="+33 6 12 34 56 78"
-                  className={`w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition-colors focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 ${
-                    errors.telephone ? 'border-red-400 bg-red-50' : 'border-gray-300 bg-white'
-                  }`}
-                  {...register('telephone')}
+                <Controller
+                  name="telephone"
+                  control={control}
+                  render={({ field }) => (
+                    <PhoneInput
+                      id="diag-tel"
+                      value={field.value}
+                      onChange={field.onChange}
+                      onBlur={field.onBlur}
+                      hasError={!!errors.telephone}
+                    />
+                  )}
                 />
                 {errors.telephone && (
                   <p className="mt-1 text-xs text-red-600">{errors.telephone.message}</p>
